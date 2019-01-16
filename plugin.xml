@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-admob" version="4.2.1">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-admob-noshare" version="0.0.1">
   <description>Google AdMob Ads plugin for Cordova, Phonegap, Ionic/Angular and Intel XDK. Monetize your app with one javascript line. Android SDK v7.5, iOS SDK v7.3.1. With support for tappx and auto-detect internet connection.</description>
   <name>AdMob Google Ads + Tappx</name>
-  <author email="info@appfeel.com" href="https://github.com/appfeel/admob-google-cordova">AppFeel</author>
+  <author email="siteadmin@c2-creative.com" href="https://github.com/c2-creative/admob-google-cordova">C2 Creative, LLC (forked from Appfeel's code)</author>
   <license>MIT</license>
-  <keywords>ad,ads,admob,google,advertising,advertisment,publicity,earn,win,play,services,iad,flurry,monetization,money,appfeel,tappx</keywords>
-  <repo>https://github.com/appfeel/admob-google-cordova.git</repo>
-  <issue>https://github.com/appfeel/admob-google-cordova/issues</issue>
+  <keywords>ad,ads,admob,google,advertising,advertisment,publicity,earn,win,play,services,iad,flurry,monetization,money,tappx</keywords>
+  <repo>https://github.com/c2creative/admob-google-cordova.git</repo>
+  <issue>https://github.com/c2creative/admob-google-cordova/issues</issue>
 
   <engines>
     <engine name="cordova" version=">=4.0.0" />
@@ -27,7 +27,7 @@
   <platform name="android">
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="AdMobAds">
-        <param name="android-package" value="com.appfeel.cordova.admob.AdMobAds" />
+        <param name="android-package" value="com.c2creative.cordova.admob.AdMobAds" />
       </feature>
     </config-file>
 
@@ -39,15 +39,10 @@
       <uses-permission android:name="android.permission.INTERNET" />
       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     </config-file>
-    <!--config-file target="res/values/strings.xml" parent="/*">
-      <string name="banid">ca-app-pub-8440343014846849/3119840614</string>
-      <string name="intid">ca-app-pub-8440343014846849/4596573817</string>
-    </config-file-->
-	  <framework src="com.google.android.gms:play-services-ads:15.0.0" />
-
-    <source-file src="src/android/AdMobAds.java" target-dir="src/com/appfeel/cordova/admob" />
-    <source-file src="src/android/AdMobAdsAdListener.java" target-dir="src/com/appfeel/cordova/admob" />
-    <source-file src="src/android/AdMobAdsRewardedAdListener.java" target-dir="src/com/appfeel/cordova/admob" />
+    <framework src="com.google.android.gms:play-services-ads:15.0.0" />
+    <source-file src="src/android/AdMobAds.java" target-dir="src/com/c2creative/cordova/admob" />
+    <source-file src="src/android/AdMobAdsAdListener.java" target-dir="src/com/c2creative/cordova/admob" />
+    <source-file src="src/android/AdMobAdsRewardedAdListener.java" target-dir="src/com/c2creative/cordova/admob" />
     <source-file src="src/android/res/xml/admob.xml" target-dir="res/xml" />
   </platform>
 
@@ -69,17 +64,17 @@
     <!-- Google AdMob framework -->
     <dependency id="cordova-libgoogleadmobads" url="https://github.com/appfeel/google-iosadmobads" commit="master"/>
     
-    <!--config-file target="*-Info.plist" parent="CFBundleURLTypes">
-      <array>
-        <dict>
-          <key>bid</key>
-          <string>ca-app-pub-8440343014846849/2335511010</string>
-        </dict>
-        <dict>
-          <key>iid</key>
-          <string>ca-app-pub-8440343014846849/3812244218</string>
-        </dict>
-      </array>
-    </config-file-->
+  </platform>
+
+  <platform name="browser">
+    <config-file target="config.xml" parent="/*">
+      <feature name="AdMobAds">
+        <param name="browser-package" value="AdMobAds" />
+      </feature>
+    </config-file>
+
+    <js-module src="src/browser/AdMobProxy.js" name="AdMobProxy">
+      <runs />
+    </js-module>
   </platform>
 </plugin>

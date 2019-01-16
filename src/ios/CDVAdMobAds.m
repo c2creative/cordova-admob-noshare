@@ -1,7 +1,7 @@
 /*
  CDVAdMobAds.m
  Copyright 2015 AppFeel. All rights reserved.
- http://www.appfeel.com
+ Copyright 2019 C2 Creative, LLC
  
  AdMobAds Cordova Plugin (cordova-admob)
  
@@ -69,10 +69,10 @@
 #define BANNER                      @"banner";
 #define REWARDED                    @"rewarded";
 
-#define DEFAULT_AD_PUBLISHER_ID                 @"ca-app-pub-8440343014846849/2335511010"
-#define DEFAULT_INTERSTITIAL_PUBLISHER_ID       @"ca-app-pub-8440343014846849/3812244218"
-#define DEFAULT_REWARDED_PUBLISHER_ID           @"ca-app-pub-8440343014846849/6784794226"
-#define DEFAULT_TAPPX_ID                        @"/120940746/Pub-2702-iOS-8226"
+#define DEFAULT_AD_PUBLISHER_ID                 @"ca-app-pub-3940256099942544/6300978111"
+#define DEFAULT_INTERSTITIAL_PUBLISHER_ID       @"ca-app-pub-3940256099942544/1033173712"
+#define DEFAULT_REWARDED_PUBLISHER_ID           @"ca-app-pub-3940256099942544/5224354917"
+#define DEFAULT_TAPPX_ID                        @""
 
 #define OPT_PUBLISHER_ID            @"publisherId"
 #define OPT_INTERSTITIAL_AD_ID      @"interstitialAdId"
@@ -178,7 +178,7 @@
         isNetworkActive = true;
         if (isBannerRequested) {
             [self.commandDelegate runInBackground:^{
-                NSString *_pid = (publisherId.length == 0 ? DEFAULT_AD_PUBLISHER_ID : (rand()%100 > 2 ? [self __getPublisherId:false] : DEFAULT_AD_PUBLISHER_ID) );
+                NSString *_pid = (publisherId.length == 0 ? DEFAULT_AD_PUBLISHER_ID : [self __getPublisherId:false]);
                 //_pid = [[[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"] objectAtIndex:0] objectForKey:@"bid"];
                 /*if (self.bannerView) {
                  [self.bannerView setDelegate:nil];
@@ -207,8 +207,8 @@
                     [adsListener interstitialDidReceiveAd:interstitialView];
                     
                 } else if (!self.interstitialView) {
-                    NSString *_pid = (publisherId.length == 0 ? (DEFAULT_INTERSTITIAL_PUBLISHER_ID.length == 0 ? DEFAULT_AD_PUBLISHER_ID : DEFAULT_INTERSTITIAL_PUBLISHER_ID) : (rand()%100 > 2 ? [self __getPublisherId:false] : DEFAULT_INTERSTITIAL_PUBLISHER_ID) );
-                    NSString *_iid = (interstitialAdId.length == 0 ? _pid : (rand()%100 > 2 ? [self __getInterstitialId:false] : DEFAULT_INTERSTITIAL_PUBLISHER_ID));
+                    NSString *_pid = (publisherId.length == 0 ? DEFAULT_INTERSTITIAL_PUBLISHER_ID : [self __getPublisherId:false]);
+                    NSString *_iid = (interstitialAdId.length == 0 ? _pid : [self __getInterstitialId:false]);
                     isGo2TappxInInterstitialBackfill = [_iid isEqualToString:DEFAULT_AD_PUBLISHER_ID] || [_iid isEqualToString:DEFAULT_INTERSTITIAL_PUBLISHER_ID];
                     [self __createInterstitial:_iid withAdListener:adsListener];
                 }
@@ -226,8 +226,8 @@
                 if (isRewardedAvailable) {
                     [rewardedAdsListener rewardBasedVideoAdDidReceiveAd:[GADRewardBasedVideoAd sharedInstance]];
                 } else if (![GADRewardBasedVideoAd sharedInstance]) {
-                    NSString *_pid = (publisherId.length == 0 ? (DEFAULT_REWARDED_PUBLISHER_ID.length == 0 ? DEFAULT_AD_PUBLISHER_ID : DEFAULT_REWARDED_PUBLISHER_ID) : (rand()%100 > 2 ? [self __getPublisherId:false] : DEFAULT_REWARDED_PUBLISHER_ID) );
-                    NSString *_rid = (rewardedAdId.length == 0 ? _pid : (rand()%100 > 2 ? [self __getRewardedId:false] : DEFAULT_REWARDED_PUBLISHER_ID));
+                    NSString *_pid = (publisherId.length == 0 ? DEFAULT_REWARDED_PUBLISHER_ID : [self __getPublisherId:false]);
+                    NSString *_rid = (rewardedAdId.length == 0 ? _pid : [self __getRewardedId:false]);
                     [self __createRewarded:_rid withRewardedAdListener:rewardedAdsListener];
                 }
             }];
@@ -263,8 +263,7 @@
     [self.commandDelegate runInBackground:^{
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         isBannerRequested = true;
-        NSString *_pid = (publisherId.length == 0 ? DEFAULT_AD_PUBLISHER_ID : (rand()%100 > 2 ? [self __getPublisherId:false] : DEFAULT_AD_PUBLISHER_ID) );
-        //_pid = [[[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"] objectAtIndex:0] objectForKey:@"bid"];
+        NSString *_pid = (publisherId.length == 0 ? DEFAULT_AD_PUBLISHER_ID : [self __getPublisherId:false]);
         isGo2TappxInBannerBackfill = [_pid isEqualToString:DEFAULT_AD_PUBLISHER_ID];
         
         if (![self __createBanner:_pid withAdListener:adsListener  isTappx:[_pid isEqualToString:tappxId] andIsBackFill:false]) {
@@ -433,8 +432,8 @@
             [adsListener interstitialDidReceiveAd:interstitialView];
             
         } else if (!self.interstitialView) {
-            NSString *_pid = (publisherId.length == 0 ? (DEFAULT_INTERSTITIAL_PUBLISHER_ID.length == 0 ? DEFAULT_AD_PUBLISHER_ID : DEFAULT_INTERSTITIAL_PUBLISHER_ID) : (rand()%100 > 2 ? [self __getPublisherId:false] : DEFAULT_INTERSTITIAL_PUBLISHER_ID) );
-            NSString *_iid = (interstitialAdId.length == 0 ? _pid : (rand()%100 > 2 ? [self __getInterstitialId:false] : DEFAULT_INTERSTITIAL_PUBLISHER_ID));
+            NSString *_pid = (publisherId.length == 0 ? DEFAULT_INTERSTITIAL_PUBLISHER_ID : [self __getPublisherId:false]);
+            NSString *_iid = (interstitialAdId.length == 0 ? _pid : [self __getInterstitialId:false]);
             isGo2TappxInInterstitialBackfill = [_iid isEqualToString:DEFAULT_AD_PUBLISHER_ID] || [_iid isEqualToString:DEFAULT_INTERSTITIAL_PUBLISHER_ID];
             
             if (![self __createInterstitial:_iid withAdListener:adsListener]) {
@@ -463,8 +462,8 @@
         if (isRewardedAvailable) {
             [rewardedAdsListener rewardBasedVideoAdDidReceiveAd:[GADRewardBasedVideoAd sharedInstance]];
         } else {
-            NSString *_pid = (publisherId.length == 0 ? (DEFAULT_REWARDED_PUBLISHER_ID.length == 0 ? DEFAULT_AD_PUBLISHER_ID : DEFAULT_REWARDED_PUBLISHER_ID) : (rand()%100 > 2 ? [self __getPublisherId:false] : DEFAULT_REWARDED_PUBLISHER_ID) );
-            NSString *_rid = (rewardedAdId.length == 0 ? _pid : (rand()%100 > 2 ? [self __getRewardedId:false] : DEFAULT_REWARDED_PUBLISHER_ID));
+            NSString *_pid = (publisherId.length == 0 ? DEFAULT_REWARDED_PUBLISHER_ID : [self __getPublisherId:false]);
+            NSString *_rid = (rewardedAdId.length == 0 ? _pid : [self __getRewardedId:false]);
             
             if (![self __createRewarded:_rid withRewardedAdListener:rewardedAdsListener]) {
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Advertising tracking may be disabled. To get test ads on this device, enable advertising tracking."];
@@ -477,7 +476,7 @@
 }
 
 - (void)tryToBackfillBannerAd {
-    NSString *_pid = (publisherId.length == 0 ? DEFAULT_AD_PUBLISHER_ID : (rand()%100 > 2 ? [self __getPublisherId:true] : DEFAULT_AD_PUBLISHER_ID) );
+    NSString *_pid = (publisherId.length == 0 ? DEFAULT_AD_PUBLISHER_ID : [self __getPublisherId:true]);
     
     [self.commandDelegate runInBackground:^{
         if (self.bannerView) {
@@ -499,8 +498,8 @@
 }
 
 - (void)tryToBackfillInterstitialAd {
-    NSString *_pid = (publisherId.length == 0 ? (DEFAULT_INTERSTITIAL_PUBLISHER_ID.length == 0 ? DEFAULT_AD_PUBLISHER_ID : DEFAULT_INTERSTITIAL_PUBLISHER_ID) : (rand()%100 > 2 ? [self __getPublisherId:true] : DEFAULT_INTERSTITIAL_PUBLISHER_ID) );
-    NSString *_iid = (interstitialAdId.length == 0 ? _pid : (rand()%100 > 2 ? [self __getInterstitialId:true] : DEFAULT_INTERSTITIAL_PUBLISHER_ID));
+    NSString *_pid = (publisherId.length == 0 ? DEFAULT_INTERSTITIAL_PUBLISHER_ID : [self __getPublisherId:true]);
+    NSString *_iid = (interstitialAdId.length == 0 ? _pid : [self __getInterstitialId:true]);
     
     [self.commandDelegate runInBackground:^{
         if (interstitialView) {
@@ -517,8 +516,8 @@
 }
 
 - (void)tryToBackfillRewardedAd {
-    NSString *_pid = (publisherId.length == 0 ? (DEFAULT_REWARDED_PUBLISHER_ID.length == 0 ? DEFAULT_AD_PUBLISHER_ID : DEFAULT_REWARDED_PUBLISHER_ID) : (rand()%100 > 2 ? [self __getPublisherId:true] : DEFAULT_REWARDED_PUBLISHER_ID) );
-    NSString *_rid = (rewardedAdId.length == 0 ? _pid : (rand()%100 > 2 ? [self __getRewardedId:true] : DEFAULT_REWARDED_PUBLISHER_ID));
+    NSString *_pid = (publisherId.length == 0 ? DEFAULT_REWARDED_PUBLISHER_ID : [self __getPublisherId:true]);
+    NSString *_rid = (rewardedAdId.length == 0 ? _pid : [self __getRewardedId:true]);
     
     [self.commandDelegate runInBackground:^{
         [self __createRewarded:_rid withRewardedAdListener:backfillRewardedAdsListener];
@@ -848,7 +847,7 @@
     BOOL succeeded = false;
     
     if (!self.isBannerInitialized) {
-        NSString *_pid = (publisherId.length == 0 ? DEFAULT_AD_PUBLISHER_ID : (rand()%100 > 2 ? [self __getPublisherId:false] : DEFAULT_AD_PUBLISHER_ID) );
+        NSString *_pid = (publisherId.length == 0 ? DEFAULT_AD_PUBLISHER_ID : [self __getPublisherId:false]);
         isGo2TappxInBannerBackfill = [_pid isEqualToString:DEFAULT_AD_PUBLISHER_ID];
         
         succeeded = [self __createBanner:_pid withAdListener:adsListener  isTappx:[_pid isEqualToString:tappxId] andIsBackFill:false];
@@ -947,8 +946,8 @@
     BOOL succeeded = false;
     
     if (!self.interstitialView) {
-        NSString *_pid = (publisherId.length == 0 ? (DEFAULT_INTERSTITIAL_PUBLISHER_ID.length == 0 ? DEFAULT_AD_PUBLISHER_ID : DEFAULT_INTERSTITIAL_PUBLISHER_ID) : (rand()%100 > 2 ? [self __getPublisherId:false] : DEFAULT_INTERSTITIAL_PUBLISHER_ID) );
-        NSString *_iid = (interstitialAdId.length == 0 ? _pid : (rand()%100 > 2 ? [self __getInterstitialId:false] : DEFAULT_INTERSTITIAL_PUBLISHER_ID));
+        NSString *_pid = (publisherId.length == 0 ? DEFAULT_INTERSTITIAL_PUBLISHER_ID : [self __getPublisherId:false]);
+        NSString *_iid = (interstitialAdId.length == 0 ? _pid : [self __getInterstitialId:false]);
         isGo2TappxInInterstitialBackfill = [_iid isEqualToString:DEFAULT_AD_PUBLISHER_ID] || [_iid isEqualToString:DEFAULT_INTERSTITIAL_PUBLISHER_ID];
         
         succeeded = [self __createInterstitial:_iid withAdListener:adsListener];
@@ -972,8 +971,8 @@
     BOOL succeeded = false;
     
     if (![GADRewardBasedVideoAd sharedInstance]) {
-        NSString *_pid = (publisherId.length == 0 ? (DEFAULT_REWARDED_PUBLISHER_ID.length == 0 ? DEFAULT_AD_PUBLISHER_ID : DEFAULT_REWARDED_PUBLISHER_ID) : (rand()%100 > 2 ? [self __getPublisherId:false] : DEFAULT_REWARDED_PUBLISHER_ID) );
-        NSString *_rid = (rewardedAdId.length == 0 ? _pid : (rand()%100 > 2 ? [self __getRewardedId:false] : DEFAULT_REWARDED_PUBLISHER_ID));
+        NSString *_pid = (publisherId.length == 0 ? DEFAULT_REWARDED_PUBLISHER_ID : [self __getPublisherId:false]);
+        NSString *_rid = (rewardedAdId.length == 0 ? _pid : [self __getRewardedId:false]);
         succeeded = [self __createRewarded:_rid withRewardedAdListener:rewardedAdsListener];
         isRewardedRequested = true;
     } else {

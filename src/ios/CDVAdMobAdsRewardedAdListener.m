@@ -2,7 +2,7 @@
 /*
  CDVAdMobAdsRewardedAdListener.m
  Copyright 2015 AppFeel. All rights reserved.
- http://www.appfeel.com
+ Copyright 2019 C2 Creative, LLC
  
  AdMobAds Cordova Plugin (cordova-admob)
  

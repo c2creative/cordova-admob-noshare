@@ -1,7 +1,7 @@
 /*
  admobAngular.js
  Copyright 2014 AppFeel. All rights reserved.
- http://www.appfeel.com
+ Copyright 2019 C2 Creative, LLC. All rights reserved.
  
  AdMobAds Cordova Plugin (cordova-admob)
  
@@ -75,11 +75,11 @@ if (typeof angular !== 'undefined') {
     // The returning object
     angularAdmob = {
       events: {
-        onAdLoaded: "appfeel.cordova.admob.onAdLoaded",
-        onAdFailedToLoad: "appfeel.cordova.admob.onAdFailedToLoad",
-        onAdOpened: "appfeel.cordova.admob.onAdOpened",
-        onAdLeftApplication: "appfeel.cordova.admob.onAdLeftApplication",
-        onAdClosed: "appfeel.cordova.admob.onAdClosed",
+        onAdLoaded: "c2creative.cordova.admob.onAdLoaded",
+        onAdFailedToLoad: "c2creative.cordova.admob.onAdFailedToLoad",
+        onAdOpened: "c2creative.cordova.admob.onAdOpened",
+        onAdLeftApplication: "c2creative.cordova.admob.onAdLeftApplication",
+        onAdClosed: "c2creative.cordova.admob.onAdClosed",
       },
       AD_SIZE: {
         BANNER: 'BANNER',

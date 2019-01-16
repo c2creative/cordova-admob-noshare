@@ -1,12 +1,8 @@
-*<p style="font-size: small;" align="right"><a style="color:#232323" color="#232323" href="http://appfeel.com">Made in Barcelona with <span color="#FCB">Love</span> and <span color="#BBCCFF">Code</span></a></p>*
-
-Cordova AdMob plugin<br>[![License][license]][npm-url] [![NPM version][npm-version]][npm-url] [![NPM downloads][npm-downloads]][npm-url]
+Cordova AdMob plugin<br>[![License][license]][npm-url] 
 ====================
 
 [npm-url]: https://www.npmjs.com/package/cordova-admob
 [license]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
-[npm-version]: https://img.shields.io/npm/v/cordova-admob.svg?style=flat
-[npm-downloads]: https://img.shields.io/npm/dm/cordova-admob.svg?style=flat
 
 ## It simply works :)
 Monetize your Cordova/Phonegap/XDK HTML5 hybrid apps and games with AdMob ads, **using latest Google AdMob SDK**.

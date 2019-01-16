@@ -1,7 +1,7 @@
 /*
  admob.js
  Copyright 2014 AppFeel. All rights reserved.
- http://www.appfeel.com
+ Copyright 2019 C2 Creative, LLC. All rights reserved.
  
  AdMobAds Cordova Plugin (cordova-admob)
  
@@ -26,17 +26,17 @@
 var admob = window.admob || {};
 
 /**
- * This enum represents appfeel-cordova-admob plugin events
+ * This enum represents cordova-admob plugin events
  */
 admob.events = {
-  onAdLoaded: "appfeel.cordova.admob.onAdLoaded",
-  onAdFailedToLoad: "appfeel.cordova.admob.onAdFailedToLoad",
-  onAdOpened: "appfeel.cordova.admob.onAdOpened",
-  onAdLeftApplication: "appfeel.cordova.admob.onAdLeftApplication",
-  onAdClosed: "appfeel.cordova.admob.onAdClosed",
-  onRewardedAd: "appfeel.cordova.admob.onRewardedAd",
-  onRewardedAdVideoStarted: "appfeel.cordova.admob.onRewardedAdVideoStarted",
-  onRewardedAdVideoCompleted: "appfeel.cordova.admob.onRewardedAdVideoCompleted",
+  onAdLoaded: "c2creative.cordova.admob.onAdLoaded",
+  onAdFailedToLoad: "c2creative.cordova.admob.onAdFailedToLoad",
+  onAdOpened: "c2creative.cordova.admob.onAdOpened",
+  onAdLeftApplication: "c2creative.cordova.admob.onAdLeftApplication",
+  onAdClosed: "c2creative.cordova.admob.onAdClosed",
+  onRewardedAd: "c2creative.cordova.admob.onRewardedAd",
+  onRewardedAdVideoStarted: "c2creative.cordova.admob.onRewardedAdVideoStarted",
+  onRewardedAdVideoCompleted: "c2creative.cordova.admob.onRewardedAdVideoCompleted",
 };
 
 /**
@@ -60,9 +60,9 @@ admob.AD_TYPE = {
 
 // This is not used by the plugin, it is just a helper to show how options are specified and their default values
 admob.options = {
-  publisherId: (/(android)/i.test(navigator.userAgent)) ? "ca-app-pub-8440343014846849/3119840614" : "ca-app-pub-8440343014846849/2335511010",
-  interstitialId: (/(android)/i.test(navigator.userAgent)) ? "ca-app-pub-8440343014846849/4596573817" : "ca-app-pub-8440343014846849/3812244218",
-  rewardedAdId: (/(android)/i.test(navigator.userAgent)) ? "ca-app-pub-8440343014846849/4854611361" : "ca-app-pub-8440343014846849/6784794226",
+  publisherId: "ca-app-pub-3940256099942544/6300978111",
+  interstitialId: "ca-app-pub-3940256099942544/1033173712",
+  rewardedAdId: "ca-app-pub-3940256099942544/5224354917",
   adSize: admob.AD_SIZE.SMART_BANNER,
   bannerAtTop: false,
   overlap: false,
@@ -75,7 +75,7 @@ admob.options = {
 };
 
 /**
- * Initialize appfeel-cordova-admob plugin with options:
+ * Initialize cordova-admob plugin with options:
  * @param {!Object}    options         AdMob options (use admob.options as template)
  * @param {function()} successCallback Callback on success
  * @param {function()} failureCallback Callback on fail

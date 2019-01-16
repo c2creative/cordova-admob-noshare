@@ -1,7 +1,7 @@
 /*
  AdMobAdsListener.java
  Copyright 2015 AppFeel. All rights reserved.
- http://www.appfeel.com
+ Copyright 2019 C2 Creative, LLC. All rights reserved.
  
  AdMobAds Cordova Plugin (cordova-admob)
  
@@ -24,7 +24,7 @@
  SOFTWARE.
  */
 
-package com.appfeel.cordova.admob;
+package com.c2creative.cordova.admob;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
